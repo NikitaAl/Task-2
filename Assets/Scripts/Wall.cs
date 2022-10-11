@@ -6,36 +6,29 @@ namespace Assets.Scripts
 {
     public class Wall : MonoBehaviour
     {
-        [SerializeField] private ItemType type;
+        public Score _Score;
+        public UnityEvent _OnWallCalorChange;
+
+        public float _upForce;
+
+        [HideInInspector] public int _count = 0;
+
+        [SerializeField] private ItemType _type;
         [SerializeField] private ItemSpawner _itemSpawner;
 
         private DragItem _item;
         private Material _material;
-
         private Color _defaultColor;
-
-        public float _upForce;
-
-
-        [HideInInspector] public int count = 0;
-        private int _count = 1;
-
-        private int _scrore = 0;
-        private int _scroreAdd = 1;
-        public TMP_Text _textScore;
-
-        public UnityEvent OnWallCalorChange;
 
         public void SetCount(int value)
         {
-            _count = value;
+            _itemSpawner._count = value;
 
-            if (count >= _itemSpawner._count)
+            if (_count >= _itemSpawner._count)
             {
                 _material.color = Color.grey;
             }
         }
-
 
         private void Start() 
         {
@@ -43,17 +36,20 @@ namespace Assets.Scripts
             _defaultColor = _material.color; 
         }
 
-        private void OnTriggerStay(Collider other) 
+        private void OnTriggerEnter(Collider other) 
         {
             var item = other.attachedRigidbody.GetComponent<DragItem>();
-
+            
             if (_item = item )
             {
                 _material.color = _defaultColor;
-                item.GetComponent<Rigidbody>().AddForce(Vector3.down * _upForce );
 
-                if (item.isDraggable == false)
+                if (item.isDraggable == true)
+                {
+                    if ( _item.Type != _type)
+                        _item.GetComponent<Rigidbody>().AddForce(Vector3.down * _upForce );  
                     TryGetItem();
+                }
                 
                 _item = null;
             }
@@ -61,16 +57,15 @@ namespace Assets.Scripts
 
         private void TryGetItem()
         {
-            if (_item.Type == type)
+            if (_item.Type == _type)
             {
                 Destroy(_item.gameObject);
-                count++;
-                _scrore += _scroreAdd;
-                _textScore.text = _scrore.ToString();
-                
-                if (count >= _itemSpawner._count)
+                _count++;
+                _Score.ScorePanel();
+
+                if (_count >= _itemSpawner._count)
                 { 
-                    OnWallCalorChange.Invoke();
+                    _OnWallCalorChange.Invoke(); 
                     _material.color = Color.grey;
                     Destroy(this);
                 }

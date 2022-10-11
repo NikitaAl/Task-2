@@ -6,16 +6,16 @@ namespace Assets.Scripts
     public class ScoreHandler : MonoBehaviour
     {
         [SerializeField] private Wall[] _walls;
-        
-        [SerializeField] private GameObject WinScreen;
-        [SerializeField] private GameObject PlayScreen;
+        [SerializeField] private Win _win;
 
         private int count;
         
-        private void Start() {
+        private void Start() 
+        {
             foreach (var wall in _walls)
-                wall.OnWallCalorChange.AddListener(OnWallCalorChange);
+                wall._OnWallCalorChange.AddListener(OnWallCalorChange);
         }
+        
         private void OnWallCalorChange()
         {
             count++;
@@ -23,8 +23,7 @@ namespace Assets.Scripts
             if (count >= 2)
             {
                 Debug.Log("Win");
-                WinScreen.SetActive(true);
-                PlayScreen.SetActive(false);
+                _win.YouWin();
             }
         }
     }

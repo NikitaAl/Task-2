@@ -95,8 +95,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0067834, y: 1.0032306, z: 1}
+  m_Center: {x: -0.0007231616, y: -0.004554105, z: 0}
 --- !u!1001 &3341801160324161306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -173,6 +173,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345166775804056837, guid: 4ad78eb7e3df05843b25b41082a8c1b7,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3878985945924413446, guid: 4ad78eb7e3df05843b25b41082a8c1b7, type: 3}
