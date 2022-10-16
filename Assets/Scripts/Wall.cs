@@ -44,7 +44,7 @@ namespace Assets.Scripts
             {
                 _material.color = _defaultColor;
 
-                if (item.isDraggable == true)
+                // if (item.isDraggable == true)
                 {
                     if ( _item.Type != _type)
                         _item.GetComponent<Rigidbody>().AddForce(Vector3.down * _upForce );  
