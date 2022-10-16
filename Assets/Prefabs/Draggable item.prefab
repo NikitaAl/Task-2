@@ -61,7 +61,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d2b63042ccce742a603e7c69f732c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
   OnHideRequest:
     m_PersistentCalls:
       m_Calls: []
+  _type: 0
+  Target: {fileID: 4469385926403624902, guid: c989883bf78a6b947adb4714a3e3d386, type: 3}
+  screenSpace: {x: 0, y: 0.3, z: 0}
+  offset: {x: 0, y: 0, z: 0}

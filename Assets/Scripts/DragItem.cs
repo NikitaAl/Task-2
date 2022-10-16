@@ -6,15 +6,17 @@ namespace Assets.Scripts
 {
     public class DragItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
+
         public ItemType Type { get => _type; }
         public UnityEvent OnHideRequest;
         public bool isDraggable { get; private set; }
 
         [SerializeField] private ItemType _type;
 
+        private Vector3 _dir;
         private Rigidbody _rigidbody;
 
-        private void Start()
+        public void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
         }
@@ -31,16 +33,11 @@ namespace Assets.Scripts
 
                 return;
             }
-
-            var pos = eventData.pointerCurrentRaycast.worldPosition;
-
-            float x = Input.GetAxis("Horizontal");
-            float y = Input.GetAxis("Vertical");
-
-            Vector3 position = new Vector3(x, y, 0f);
-
-            _rigidbody.MovePosition(pos);
-                      
+            
+            _dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            var pos = eventData.pointerCurrentRaycast.worldPosition;       
+            pos += _dir; 
+            _rigidbody.MovePosition(pos);         
         }
 
         public void OnPointerDown(PointerEventData eventData)
